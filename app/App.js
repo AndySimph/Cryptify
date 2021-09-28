@@ -1,10 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+/* eslint-disable prettier/prettier */
 
 import React from 'react';
 import type {Node} from 'react';
@@ -17,10 +11,8 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Header from './header';
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -55,6 +47,8 @@ const App: () => Node = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  //console.log("here")
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -66,14 +60,14 @@ const App: () => Node = () => {
           leftComponent={{icon: 'menu', color: '#fff'}}
           centerComponent={{text: 'MY TITLE', style: {color: '#fff'}}}
           rightComponent={{icon: 'home', color: '#fff'}}
-        /> */}
+        /> */ 
+        <Header />}
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <Section title="Crypto Modeling">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
+            Put Cryptos here.
           </Section>
           <Section title="Learn More">
             Read the docs to discover what to do next:
@@ -104,3 +98,28 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
+/*
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text>Cryptos go here</Text>
+      {/* <StatusBar style="auto" /> *//*} 
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+*/
