@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import React from 'react';
-import type {Node} from 'react';
+import type { Node } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,10 +11,22 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Header from './header';
 
-const Section = ({children, title}): Node => {
+function PortfolioScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+const Section = ({ children, title }): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -55,13 +67,7 @@ const App: () => Node = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        {/* <Header
-          placement="left"
-          leftComponent={{icon: 'menu', color: '#fff'}}
-          centerComponent={{text: 'MY TITLE', style: {color: '#fff'}}}
-          rightComponent={{icon: 'home', color: '#fff'}}
-        /> */ 
-        <Header />}
+        {<Header />}
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
@@ -69,12 +75,18 @@ const App: () => Node = () => {
           <Section title="Crypto Modeling">
             Put Cryptos here.
           </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
+          <Section title="Tabs">
+            Profile, Search, and Settings
           </Section>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView>,
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Portfolio" component={PortfolioScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
 
@@ -100,26 +112,3 @@ const styles = StyleSheet.create({
 export default App;
 
 
-/*
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Cryptos go here</Text>
-      {/* <StatusBar style="auto" /> *//*} 
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-*/

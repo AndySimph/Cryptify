@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <View style={StyleSheet.header}>
       <View>
-        <Text style={styles.headerText}>  Crypto</Text>
+        <Text style={styles.headerText}>Crypto</Text>
       </View>
     </View>
   );
@@ -26,9 +26,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerText: {
-    fontWeight: 'bold',
-    fontSize: 20,
+    // fontFamily: "Courier",
+    // fontWeight: 'bold',
+    fontSize: 66,
     color: '#333',
+    textAlign: 'center',
     letterSpacing: 1,
   },
   icon: {
