@@ -15,7 +15,8 @@ import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import PortfolioScreen from '../screens/PortfolioScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import ExploreScreen from '../screens/ExploreScreen';
+import FollowingScreen from '../screens/FollowingScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -85,10 +86,18 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Explore"
+        component={ExploreScreen}
         options={{
-          title: 'Tab Two',
+          title: 'Explore',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Following"
+        component={FollowingScreen}
+        options={{
+          title: 'Following',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
