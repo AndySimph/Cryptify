@@ -2,24 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-
 import alpacaApi from '../services/alpaca';
 
 import { Text, View } from '../components/Themed';
-
-// export default function ModalScreen() {
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>Modal</Text>
-//       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-//       <EditScreenInfo path="/screens/ModalScreen.tsx" />
-
-//       {/* Use a light status bar on iOS to account for the black space above the modal */}
-//       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-//     </View>
-//   );
-// }
 
 class ModalScreen extends React.Component {
 
@@ -59,10 +44,10 @@ class ModalScreen extends React.Component {
 
   render() {
       return <View>
-          <Text>Dashboard Screen</Text>
+          <Text style={styles.title}>Dashboard Screen</Text>
 
-          <View>
-              <Text>Buying Power</Text>
+          <View style={styles.separator}>
+              <Text style={styles.container}>Buying Power</Text>
               <Text>{this.state.buying_power}</Text>
               <Text>Cash</Text>
               <Text>{this.state.cash}</Text>
@@ -79,12 +64,11 @@ export default ModalScreen
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   title: {
-    fontSize: 20,
+    fontSize: 26,
     fontWeight: 'bold',
   },
   separator: {

@@ -10,7 +10,6 @@ export default function PortfolioScreen({ navigation }: RootTabScreenProps<'Foll
         <View style={styles.container}>
             <Text style={styles.title}>Following</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <EditScreenInfo path="/screens/FollowingScreen.tsx" />
         </View>
     );
 }
