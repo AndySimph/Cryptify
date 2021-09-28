@@ -68,7 +68,7 @@ function BottomTabNavigator() {
         component={PortfolioScreen}
         options={({ navigation }: RootTabScreenProps<'Portfolio'>) => ({
           title: 'Portfolio',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -90,7 +90,7 @@ function BottomTabNavigator() {
         component={ExploreScreen}
         options={{
           title: 'Explore',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -98,7 +98,7 @@ function BottomTabNavigator() {
         component={FollowingScreen}
         options={{
           title: 'Following',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
         }}
       />
     </BottomTab.Navigator>
