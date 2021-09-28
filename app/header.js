@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 export default function Header() {
@@ -26,11 +26,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerText: {
-    // fontFamily: "Courier",
-    // fontWeight: 'bold',
-    fontSize: 66,
+    fontWeight: 'bold',
+    fontSize: 20,
     color: '#333',
-    textAlign: 'center',
     letterSpacing: 1,
   },
   icon: {
