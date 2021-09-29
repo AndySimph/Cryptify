@@ -11,7 +11,6 @@ export default function ExploreScreen({ navigation }: RootTabScreenProps<'Explor
 
   //Declare data
   const [data, setData] = useState([]);
-  const [selectedCoinData, setSelectedCoinData] = useState(null);
 
   //Get data
   useEffect(() => {
@@ -25,13 +24,7 @@ export default function ExploreScreen({ navigation }: RootTabScreenProps<'Explor
     fetchMarketData();
   }, [])
 
-  const bottomSheetModalRef = useRef(null);
-
-  const snapPoints = useMemo(() => ['50%'], []);
-
   const openModal = (item) => {
-    // setSelectedCoinData(item);
-    // bottomSheetModalRef.current?.present();
 
     navigation.navigate('Coin', item.name);
   }
@@ -78,15 +71,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#A9ABB1',
     marginHorizontal: 16,
     marginTop: 16,
-  },
-  bottomSheet: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: -4,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
   },
 });
