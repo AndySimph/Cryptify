@@ -1,10 +1,8 @@
 //Import libraries for the expore screen
-// import * as React from 'react';
+//import * as React from 'react';
 import React, {useRef, useMemo, useState, useEffect} from 'react';
 import { StyleSheet, FlatList } from 'react-native';
-
 import { Text, View } from '../components/Themed';
-
 import { getMarketData } from '../services/coingecko';
 import ListItem from '../components/ListCoins';
 
@@ -21,6 +19,7 @@ export default function ExploreScreen() {
       const marketData = await getMarketData();
 
       setData(marketData);
+
     }
 
     fetchMarketData();
