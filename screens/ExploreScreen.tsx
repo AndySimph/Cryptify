@@ -18,7 +18,6 @@ export default function ExploreScreen({ navigation }: RootTabScreenProps<'Explor
       const marketData = await getMarketData();
 
       setData(marketData);
-
     }
 
     fetchMarketData();
@@ -47,8 +46,7 @@ export default function ExploreScreen({ navigation }: RootTabScreenProps<'Explor
           logoUrl={item.image}
           onPress={() => openModal(item)}
         />
-      )
-      }
+      )}
     />
   );
 }
