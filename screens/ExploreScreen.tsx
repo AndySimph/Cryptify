@@ -2,7 +2,6 @@
 import React, {useRef, useMemo, useState, useEffect} from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
 import { getMarketData } from '../services/coingecko';
