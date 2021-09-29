@@ -30,12 +30,10 @@ export default function ExploreScreen({ navigation }: RootTabScreenProps<'Explor
   const snapPoints = useMemo(() => ['50%'], []);
 
   const openModal = (item) => {
-    console.log("here");
-    // Navigation();
     // setSelectedCoinData(item);
     // bottomSheetModalRef.current?.present();
 
-    navigation.navigate('Coin');
+    navigation.navigate('Coin', item.name);
   }
 
 

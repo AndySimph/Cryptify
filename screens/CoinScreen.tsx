@@ -2,13 +2,16 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
+import ExploreScreen from './ExploreScreen';
 
-export default function CoinScreen({ navigation }: RootTabScreenProps<'Coin'>) {
+export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Coin'>) {
+    const item_id = route.params;
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Coin</Text>
+            <Text style={styles.title}></Text>
+            <Text>{item_id}</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        </View>
+        </View >
     );
 }
 
