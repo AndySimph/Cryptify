@@ -1,13 +1,13 @@
 //Import libraries for the expore screen
 //import * as React from 'react';
-import React, {useRef, useMemo, useState, useEffect} from 'react';
+import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { Text, View } from '../components/Themed';
+import { RootTabScreenProps } from '../types';
 import { getMarketData } from '../services/coingecko';
 import ListItem from '../components/ListCoins';
-
 //Function to get set the explore screen
-export default function ExploreScreen() {
+export default function ExploreScreen({ navigation }: RootTabScreenProps<'Explore'>) {
 
   //Declare data
   const [data, setData] = useState([]);
@@ -30,9 +30,14 @@ export default function ExploreScreen() {
   const snapPoints = useMemo(() => ['50%'], []);
 
   const openModal = (item) => {
-    setSelectedCoinData(item);
-    bottomSheetModalRef.current?.present();
+    console.log("here");
+    // Navigation();
+    // setSelectedCoinData(item);
+    // bottomSheetModalRef.current?.present();
+
+    navigation.navigate('Coin');
   }
+
 
   return (
     //Create the list
@@ -51,7 +56,8 @@ export default function ExploreScreen() {
           logoUrl={item.image}
           onPress={() => openModal(item)}
         />
-      )}
+      )
+      }
     />
   );
 }
