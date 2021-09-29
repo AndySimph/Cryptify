@@ -1,17 +1,19 @@
+//Import libraries for the alpaca API
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
 import { Platform, StyleSheet } from 'react-native';
-
 import alpacaApi from '../services/alpaca';
-
 import { Text, View } from '../components/Themed';
 
+//Class for the screen
 class ModalScreen extends React.Component {
 
+  //Create the title
   static navigationOptions = {
       title: 'Dashboard'
   }
 
+  //Create a constructor for the data
   constructor(props) {
       super(props)
 
@@ -23,11 +25,13 @@ class ModalScreen extends React.Component {
       }
   }
 
+  //Get the data from the API
   componentDidMount() {
       console.log('fetch data from alpaca')
 
       const api = alpacaApi()
 
+      //Use the account to get account data
       api.getAccount().then((response) => {
           console.log(response)
 
@@ -42,6 +46,7 @@ class ModalScreen extends React.Component {
       })
   }
 
+  //Output data
   render() {
       return <View>
           <Text style={styles.title}>Dashboard Screen</Text>

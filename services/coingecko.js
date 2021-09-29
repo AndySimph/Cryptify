@@ -1,8 +1,9 @@
+//Libraries for coingecko
 //Install axios and moment using yarn
-
 import axios from 'axios';
 import moment from 'moment';
 
+//Format the sparkline
 const formatSparkline = (numbers) => {
   const pastWeek = moment().subtract(7, 'days').unix();
 
@@ -16,6 +17,7 @@ const formatSparkline = (numbers) => {
   return formattedSparkline;
 }
 
+//Format the data
 const formatMarketData = (data) => {
   let formattedData = [];
 
@@ -35,6 +37,7 @@ const formatMarketData = (data) => {
   return formattedData;
 }
 
+//Get the data
 export const getMarketData = async () => {
   try {
     //api call using requested link

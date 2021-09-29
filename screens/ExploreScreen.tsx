@@ -1,3 +1,4 @@
+//Import libraries for the expore screen
 // import * as React from 'react';
 import React, {useRef, useMemo, useState, useEffect} from 'react';
 import { StyleSheet, FlatList } from 'react-native';
@@ -7,21 +8,14 @@ import { Text, View } from '../components/Themed';
 import { getMarketData } from '../services/coingecko';
 import ListItem from '../components/ListCoins';
 
-const ListHeader = () => (
-  <>
-    <View style={styles.titleWrapper}>
-        <Text style={styles.largeTitle}>Markets</Text>
-      </View>
-    <View style={styles.divider} />
-  </>
-)
-
-
+//Function to get set the explore screen
 export default function ExploreScreen() {
 
+  //Declare data
   const [data, setData] = useState([]);
   const [selectedCoinData, setSelectedCoinData] = useState(null);
 
+  //Get data
   useEffect(() => {
     const fetchMarketData = async () => {
       const marketData = await getMarketData();
@@ -42,17 +36,14 @@ export default function ExploreScreen() {
   }
 
   return (
-    // <View style={styles.container}>
-    //   <Text style={styles.title}>Explore</Text>
-    //   <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-    //   <EditScreenInfo path="/screens/ExploreScreen.tsx" />
-    // </View>
-
-    // <SafeAreaView style={styles.container}>
+    //Create the list
     <FlatList
+      //Set the variables and data
       keyExtractor={(item) => item.id}
       data={data}
       renderItem={({ item }) => (
+
+        //Set the properties in the item
         <ListItem
           name={item.name}
           symbol={item.symbol}
@@ -62,9 +53,7 @@ export default function ExploreScreen() {
           onPress={() => openModal(item)}
         />
       )}
-      ListHeaderComponent={<ListHeader />}
     />
-    // </SafeAreaView>
   );
 }
 
@@ -98,20 +87,3 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 });
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   title: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//   },
-//   separator: {
-//     marginVertical: 30,
-//     height: 1,
-//     width: '80%',
-//   },
-// });
