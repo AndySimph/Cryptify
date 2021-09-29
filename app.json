@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "new_proj2",
-    "slug": "new_proj2",
+    "name": "Cryptify",
+    "slug": "Cryptify",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
