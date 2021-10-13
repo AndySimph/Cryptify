@@ -49,7 +49,6 @@ class ModalScreen extends React.Component {
   render() {
     return <View>
       <Text style={styles.title}>Dashboard Screen</Text>
-
       <View style={styles.separator}>
         <Text style={styles.container}>Buying Power</Text>
         <Text>{this.state.buying_power}</Text>
