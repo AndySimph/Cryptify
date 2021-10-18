@@ -37,41 +37,41 @@ const Chart = ({ currentPrice, logoUrl, name, symbol, priceChangePercentage7d, s
   }
 
   return (
-    // <ChartPathProvider data={{ points: sparkline, smoothingStrategy: 'bezier' }}>
-    //   <View style={styles.chartWrapper}>
+    <ChartPathProvider data={{ points: sparkline, smoothingStrategy: 'bezier' }}>
+      <View style={styles.chartWrapper}>
 
-    //     {/* Titles */}
-    //     <View style={styles.titlesWrapper}>
-    //       <View style={styles.upperTitles}>
-    //         <View style={styles.upperLeftTitle}>
-    //           <Image source={{ uri: logoUrl }} style={styles.image} />
-    //           <Text style={styles.subtitle}>{name} ({symbol.toUpperCase()})</Text>
-    //         </View>
-    //         <Text style={styles.subtitle}>7d</Text>
-    //       </View>
-    //       <View style={styles.lowerTitles}>
-    //         <ChartYLabel
-    //           format={formatUSD}
-    //           style={styles.boldTitle}
-    //         />
-    //         <Text style={[styles.title, {color: priceChangeColor}]}>{priceChangePercentage7d.toFixed(2)}%</Text>
-    //       </View>
-    //     </View>
+        {/* Titles */}
+        <View style={styles.titlesWrapper}>
+          <View style={styles.upperTitles}>
+            <View style={styles.upperLeftTitle}>
+              <Image source={{ uri: logoUrl }} style={styles.image} />
+              <Text style={styles.subtitle}>{name} ({symbol.toUpperCase()})</Text>
+            </View>
+            <Text style={styles.subtitle}>7d</Text>
+          </View>
+          <View style={styles.lowerTitles}>
+            <ChartYLabel
+              format={formatUSD}
+              style={styles.boldTitle}
+            />
+            <Text style={[styles.title, {color: priceChangeColor}]}>{priceChangePercentage7d.toFixed(2)}%</Text>
+          </View>
+        </View>
 
-    //     { chartReady ?
-    //     (<View style={styles.chartLineWrapper}>
-    //       <ChartPath height={SIZE / 2} stroke="black" width={SIZE} />
-    //       <ChartDot style={{ backgroundColor: 'black' }} />
-    //       </View>)
+        { chartReady ?
+        (<View style={styles.chartLineWrapper}>
+          <ChartPath height={SIZE / 2} stroke="black" width={SIZE} />
+          <ChartDot style={{ backgroundColor: 'black' }} />
+          </View>)
 
-    //       :
+          :
 
-    //       null
+          null
         
-    //     }
+        }
         
-    //   </View>
-    // </ChartPathProvider>
+      </View>
+    </ChartPathProvider>
   )
 }
 
