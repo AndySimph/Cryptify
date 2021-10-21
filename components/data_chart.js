@@ -86,10 +86,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    color: '#A9ABB1',
   },
   upperLeftTitle: {
     flexDirection: 'row',
     alignItems: 'center',
+    color: '#A9ABB1',
   },
   image: {
     width: 24,
@@ -108,9 +110,11 @@ const styles = StyleSheet.create({
   boldTitle: {
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#A9ABB1',
   },
   title: {
     fontSize: 18,
+    color: '#A9ABB1',
   },
   chartLineWrapper: {
     marginTop: 40,
