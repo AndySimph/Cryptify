@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#A9ABB1',
   },
   lowerTitles: {
