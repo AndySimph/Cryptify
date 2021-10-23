@@ -47,7 +47,7 @@ const Chart = ({ currentPrice, logoUrl, name, symbol, priceChangePercentage7d, s
               <Image source={{ uri: logoUrl }} style={styles.image} />
               <Text style={styles.subtitle}>{name} ({symbol.toUpperCase()})</Text>
             </View>
-            <Text style={styles.subtitle}>7d</Text>
+            <Text style={styles.subtitle}>Past 7 Days:</Text>
           </View>
           <View style={styles.lowerTitles}>
             <ChartYLabel
