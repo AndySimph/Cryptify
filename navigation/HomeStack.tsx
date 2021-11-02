@@ -13,6 +13,7 @@ import FollowingScreen from '../screens/FollowingScreen';
 import ModalScreen from '../screens/ModalScreen';
 import CoinScreen from '../screens/CoinScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import RecommendedScreen from '../screens/RecommendedScreen'
 import LinkingConfiguration from './LinkingConfiguration';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 
@@ -36,6 +37,9 @@ function HomeStack() {
         <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="Modal" component={ModalScreen} />
+        </Stack.Group>
+        <Stack.Group screenOptions={{ presentation: 'card' }}>
+          <Stack.Screen name="Recommended" component={RecommendedScreen} />
         </Stack.Group>
       </Stack.Navigator>
     );
@@ -73,13 +77,28 @@ function BottomTabNavigator() {
             ),
           })}
         />
+        {/* added things on option= line inside () and headerRight: */}
         <BottomTab.Screen
           name="Explore"
           component={ExploreScreen}
-          options={{
+          options={({ navigation }: RootTabScreenProps<'Explore'>) => ({
             title: 'Explore',
             tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
-          }}
+            headerRight: () => (
+              <Pressable
+              onPress={() => navigation.navigate('Recommended')}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}>
+                <FontAwesome
+                  name="info-circle"
+                  size={25}
+                  color={Colors[colorScheme].text}
+                  style={{ marginRight: 15 }}
+                />
+              </Pressable>
+            ),
+          })}
         />
         <BottomTab.Screen
           name="Following"
