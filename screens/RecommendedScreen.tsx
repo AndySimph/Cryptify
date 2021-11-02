@@ -6,7 +6,7 @@ import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
 export default function RecommendedScreen({ navigation }: RootTabScreenProps<'Recommended'>) {
-    //to change the links, change link inside openURL() and change name of the website to whatever
+    //to change the links, change link inside variables and add descriptions inside discription variables
     var web1:string = "http://google.com"
     var web2:string = "http://youtube.com"
     var web3:string = "http://google.com"
