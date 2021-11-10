@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { View, ActivityIndicator } from 'react-native';
+//import { getAuth } from "firebase/auth";
 
 import Firebase from '../services/firebase';
 import { AuthenticatedUserContext } from './AuthenticatedUserProvider';
