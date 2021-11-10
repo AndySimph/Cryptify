@@ -25,7 +25,14 @@ export default function ExploreScreen({ navigation }: RootTabScreenProps<'Explor
 
   const openModal = (item) => {
 
-    navigation.navigate('Coin', item.name);
+    navigation.navigate('Coin', {
+      currentPrice: item.current_price,
+      logoUrl: item.image,
+      name: item.name,
+      symbol: item.symbol,
+      priceChangePercentage7d: item.price_change_percentage_7d_in_currency,
+      sparkline: item?.sparkline_in_7d.price,
+    });
   }
 
 

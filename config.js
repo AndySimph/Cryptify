@@ -7,6 +7,7 @@ const config = {
   APCA_API_SECRET_KEY: 'secret_key',
   // BASE_URL: 'https://api.alpaca.markets/',
   BASE_URL: 'https://paper-api.alpaca.markets/',
+  // ORDERS_URL = 'https://paper-api.alpaca.markets/v2/orders'
   /*apiKey: API_KEY,
   authDomain: AUTH_DOMAIN,
   databaseURL: DATABASE_URL,

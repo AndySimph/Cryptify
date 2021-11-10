@@ -1,5 +1,5 @@
 import apisauce from 'apisauce'
-import config from '../config'
+import config from '../config.js'
 
 const alpacaApi = (baseURL = config.BASE_URL) => {
     
@@ -14,6 +14,16 @@ const alpacaApi = (baseURL = config.BASE_URL) => {
 
     const getAccount = () => api.get('v2/account')
     const getPositions = () => api.get('v2/positions')
+
+    const create_order = (symbol, qty, side, type, time_in_force) => api.get('v2/orders')
+        data = {
+            "symbol": symbol,
+            "qty": qty,
+            "side": side,
+            "type": type,
+            "time_in_force": time_in_force
+        }
+        api.post(ORDERS_URL, data, header=HEADERS)
 
     return {
         getAccount,
