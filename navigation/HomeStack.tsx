@@ -6,7 +6,7 @@ import { ColorSchemeName, Pressable } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 import Colors from '../constants/Colors';
-// import useColorScheme from '../hooks/useColorScheme';
+import useColorScheme from '../hooks/useColorScheme';
 import PortfolioScreen from '../screens/PortfolioScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import FollowingScreen from '../screens/FollowingScreen';
@@ -47,7 +47,7 @@ function HomeStack() {
 
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
-  const colorScheme = "dark";//useColorScheme();
+  const colorScheme = useColorScheme();
 
   return (
     <BottomTab.Navigator
