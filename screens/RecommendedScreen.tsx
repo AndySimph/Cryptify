@@ -5,23 +5,40 @@ import { Linking } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
+// const WEB_SCRAPING_SCRIPT = "../web_scraping.py"
+
+// Run the web scraping python script to get new articles
+// NEEDS WORK
+// const {PythonShell} = require('python-shell');
+
+// PythonShell.run(WEB_SCRAPING_SCRIPT, null, function (err) {
+//   if (err) throw err;
+//   console.log('finished');
+// });
+
+// Retrieve the current recommended articles
+var articles = require("../articles.json");
+
 export default function RecommendedScreen({ navigation }: RootTabScreenProps<'Recommended'>) {
-    //to change the links, change link inside variables and add descriptions inside discription variables
-    var link1:string = "http://google.com";
-    var link2:string = "http://youtube.com";
-    var link3:string = "http://google.com";
-    var link4:string = "http://google.com";
-    var link5:string = "http://google.com";
-    var title1:string = "Goggle";
-    var title2:string = "Youtube";
-    var title3:string = "Goggle";
-    var title4:string = "Goggle";
-    var title5:string = "Goggle";
-    var desc1:string = "\t\tdescription of website 1";
-    var desc2:string = "\t\tdescription of website 2";
-    var desc3:string = "\t\tdescription of website 3";
-    var desc4:string = "\t\tdescription of website 4";
-    var desc5:string = "\t\tdescription of website 5";
+    //Uses
+    var link1:string = articles[0]['url'];
+    var link2:string = articles[1]['url'];
+    var link3:string = articles[2]['url'];
+    var link4:string = articles[3]['url'];
+    var link5:string = articles[4]['url'];
+
+    var title1:string = articles[0]['title'];
+    var title2:string = articles[1]['title'];
+    var title3:string = articles[2]['title'];
+    var title4:string = articles[3]['title'];
+    var title5:string = articles[4]['title'];
+
+    var desc1:string = articles[0]['description'];
+    var desc2:string = articles[1]['description'];
+    var desc3:string = articles[2]['description'];
+    var desc4:string = articles[3]['description'];
+    var desc5:string = articles[4]['description'];
+
     return (
         <View style={styles.container}>
             <Text style={styles.link}
@@ -64,11 +81,11 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     link: {
-        fontSize: 30,
+        fontSize: 16,
         fontWeight: 'bold',
         color: 'blue',
     },
     description: {
-        fontSize: 15,
+        fontSize: 12,
     },
 });

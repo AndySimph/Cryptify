@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, Image, Dimensions, ActivityIndicator } from 'react-native'
-import {ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from '@rainbow-me/animated-charts';
+import { ChartDot, ChartPath, ChartPathProvider, ChartYLabel } from '@rainbow-me/animated-charts';
 import { useSharedValue } from 'react-native-reanimated';
 
 const { width: SIZE } = Dimensions.get('window');
@@ -28,7 +28,7 @@ const Chart = ({ currentPrice, logoUrl, name, symbol, priceChangePercentage7d, s
       return formattedValue;
     }
 
-    const formattedValue =`$${parseFloat(value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`
+    const formattedValue = `$${parseFloat(value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`
     return formattedValue;
   };
 
@@ -54,22 +54,22 @@ const Chart = ({ currentPrice, logoUrl, name, symbol, priceChangePercentage7d, s
               format={formatUSD}
               style={styles.boldTitle}
             />
-            <Text style={[styles.title, {color: priceChangeColor}]}>{priceChangePercentage7d.toFixed(2)}%</Text>
+            <Text style={[styles.title, { color: priceChangeColor }]}>{priceChangePercentage7d.toFixed(2)}%</Text>
           </View>
         </View>
 
-        { chartReady ?
-        (<View style={styles.chartLineWrapper}>
-          <ChartPath height={SIZE / 2} stroke="white" width={SIZE} />
-          <ChartDot style={{ backgroundColor: 'white' }} />
+        {chartReady ?
+          (<View style={styles.chartLineWrapper}>
+            <ChartPath height={SIZE / 2} stroke="black" width={SIZE} />
+            <ChartDot style={{ backgroundColor: 'black' }} />
           </View>)
 
           :
 
           null
-        
+
         }
-        
+
       </View>
     </ChartPathProvider>
   )
@@ -86,12 +86,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    color: '#A9ABB1',
+    color: 'black',
   },
   upperLeftTitle: {
     flexDirection: 'row',
     alignItems: 'center',
-    color: '#A9ABB1',
+    color: 'black',
   },
   image: {
     width: 24,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    color: '#A9ABB1',
+    color: 'black',
   },
   lowerTitles: {
     flexDirection: 'row',
@@ -110,11 +110,11 @@ const styles = StyleSheet.create({
   boldTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#A9ABB1',
+    color: 'black',
   },
   title: {
     fontSize: 18,
-    color: '#A9ABB1',
+    color: 'black',
   },
   chartLineWrapper: {
     marginTop: 40,

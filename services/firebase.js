@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 //npm install firebase@5.0.1
 //expo install expo-constants react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
-import firebase from '@firebase/app'
-import '@firebase/auth'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJBFFG4XfWzPkZJLpf6B0GNxH8BGcMmE4",
