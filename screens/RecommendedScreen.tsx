@@ -12,11 +12,11 @@ export default function RecommendedScreen({ navigation }: RootTabScreenProps<'Re
     var link3:string = "http://google.com";
     var link4:string = "http://google.com";
     var link5:string = "http://google.com";
-    var title1:string = "Goggle";
+    var title1:string = "Google";
     var title2:string = "Youtube";
-    var title3:string = "Goggle";
-    var title4:string = "Goggle";
-    var title5:string = "Goggle";
+    var title3:string = "Google";
+    var title4:string = "Google";
+    var title5:string = "Google";
     var desc1:string = "\t\tdescription of website 1";
     var desc2:string = "\t\tdescription of website 2";
     var desc3:string = "\t\tdescription of website 3";
