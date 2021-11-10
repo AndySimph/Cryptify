@@ -3,6 +3,8 @@ Repository for a stock program that will be able to predict the trends of stocks
 
 Type
 
+npm install -g expo-cli
+
 npm install
 
 npm install firebase@8.10.0
