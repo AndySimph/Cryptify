@@ -44,7 +44,7 @@ class ModalScreen extends React.Component {
     //Use the account to get account data
     api.getAccount().then((response) => {
 
-      console.log(response)
+      // console.log(response)
 
       //Check the response
       if (response.ok) {
