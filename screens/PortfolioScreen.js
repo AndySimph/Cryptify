@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { useContext } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Pressable } from 'react-native'
 
 import { Text, View } from '../components/Themed'
 import { RootTabScreenProps } from '../types'
 import Firebase from '../services/firebase'
-import { IconButton } from '../components'
+import { IconButton, Button } from '../components'
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider'
 
 const auth = Firebase.auth();
@@ -19,6 +19,12 @@ export default function PortfolioScreen() {
             console.log(error)
         }
     };
+    const uid = user.uid;
+    const incBalance = async() => {
+        Firebase.database().ref('users/').push({
+            balance: 1000
+        });
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.title2}>{user.email}</Text>
@@ -29,6 +35,16 @@ export default function PortfolioScreen() {
                 name='logout'
                 size={24}
                 color='#000'
+            />
+            <Button
+                onPress={incBalance}
+                backgroundColor='#bcbcbc'
+                title='Increase'
+                titleColor='#000'
+                titleSize={20}
+                containerStyle={{
+                    marginBottom: 24
+                }}
             />
         </View>
     )

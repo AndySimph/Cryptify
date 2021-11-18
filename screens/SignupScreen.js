@@ -7,6 +7,7 @@ import { Button, InputField, ErrorMessage } from '../components';
 import Firebase from '../services/firebase';
 
 const auth = Firebase.auth();
+db = Firebase.firestore();
 
 export default function SignupScreen({ navigation }) {
     const [email, setEmail] = useState('');
@@ -29,6 +30,11 @@ export default function SignupScreen({ navigation }) {
         try {
             if (String(email) !== "" && String(password) !== "") {
                 await auth.createUserWithEmailAndPassword(String(email), String(password));
+                //console.log("LOG HERE")
+                //console.log(auth.uid)
+                //db.collection("users").doc("auth.uid").set({
+                //    balance: 1000
+                //});
             }
             else if (String(email) == "" && String(password) == "") {
                 setSignupError("No email or password entered.")

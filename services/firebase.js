@@ -3,6 +3,8 @@
 //expo install expo-constants react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import 'firebase/database'
+import  'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJBFFG4XfWzPkZJLpf6B0GNxH8BGcMmE4",
