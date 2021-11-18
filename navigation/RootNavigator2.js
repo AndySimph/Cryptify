@@ -10,6 +10,7 @@ import HomeStack from './HomeStack';
 import HomeNavigation from './HomeStack';
 
 const auth = Firebase.auth();
+db = Firebase.firestore();
 
 export default function RootNavigator2() {
     const { user, setUser } = useContext(AuthenticatedUserContext);
@@ -22,9 +23,22 @@ export default function RootNavigator2() {
             try {
                 await (authenticatedUser ? setUser(authenticatedUser) : setUser(null));
                 setIsLoading(false);
+                //console.log("LOG HERE")
+                //console.log(authenticatedUser.uid)
+                //Create database entry for userID if one doesn't exist already
+                const userRef = db.collection('users').doc(authenticatedUser.uid);
+                userRef.get()
+                    .then((docSnapshot) => {
+                        if (!docSnapshot.exists){
+                            userRef.set({
+                                balance:10000
+                            })
+                        }
+                    })
             } catch (error) {
                 console.log(error);
             }
+            
         });
   
         // unsubscribe auth listener on unmount
