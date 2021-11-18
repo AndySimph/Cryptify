@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {useState} from 'react';
 import { useContext } from 'react'
 import { StyleSheet, Pressable } from 'react-native'
 
@@ -29,6 +30,10 @@ var balanceGet = {
 }
 
 export default function PortfolioScreen() {
+    /* this.state = {
+        balance: 0
+    } */
+    let [userData, setUserData] = useState({});
     const { user } = useContext(AuthenticatedUserContext);
     const handleSignOut = async () => {
         try {
@@ -38,23 +43,56 @@ export default function PortfolioScreen() {
         }
     };
     const uid = user.uid;
-    let balance = 0;
     //get document from database
-    db.collection("users").doc(uid)
-        .withConverter(balanceGet)
-        .get().then((doc) => {
-            //store data in new object
-            var uData = doc.data();
-            //put balance into a variable to use
-            balance = uData.getBalance();
-            //console.log(uData.getBalance());
+    const searchUser = () => {
+        db.collection('users').doc(uid).get().then((doc) => {
+            let userDetails = {};
+            userDetails = doc.data();
+            userDetails['balance'] = doc.data().balance;
+            setUserData(userDetails)
         })
+    }
+    //function that increases balance
+    const increaseBalance = () => {
+        userData.balance = userData.balance + 1;
+        const userRef = db.collection('users').doc(uid);
+            userRef.get()
+                .then((docSnapshot) => {
+                    if (docSnapshot.exists){
+                        userRef.set({
+                            balance:userData.balance
+                        })
+                    }
+                });
+    }
     //text with {balance} would display balance of the user
     return (
         <View style={styles.container}>
             <Text style={styles.title2}>{user.email}</Text>
             <Text style={styles.title}>Portfolio</Text>
-            <Text style={styles.title}>{balance}</Text>
+            <Button
+                onPress={searchUser}
+                backgroundColor='#bcbcbc'
+                title='Show Balance'
+                titleColor='#000'
+                titleSize={20}
+                width='50%'
+                containerStyle={{
+                    marginBottom: 5
+                }}
+            />
+            <Text style={styles.title}>Balance: {userData ? userData.balance : ''}</Text>
+            <Button
+                onPress={increaseBalance}
+                backgroundColor='#bcbcbc'
+                title='Increase Balance'
+                titleColor='#000'
+                titleSize={20}
+                width='50%'
+                containerStyle={{
+                    marginBottom: 5
+                }}
+            />
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <IconButton
                 onPress={handleSignOut}
@@ -62,7 +100,6 @@ export default function PortfolioScreen() {
                 size={24}
                 color='#000'
             />
-            
         </View>
     )
 }
