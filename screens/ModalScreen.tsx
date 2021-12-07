@@ -1,13 +1,23 @@
 //Import libraries for the alpaca API
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, FlatList } from 'react-native';
 import alpacaApi from '../services/alpaca';
 import { Text, View } from '../components/Themed';
 import { greaterThan } from 'react-native-reanimated';
 
 import apisauce from 'apisauce'
 import config from '../config.js'
+
+import { IconButton } from '../components'
+
+const handleSignOut = async () => {
+  try {
+      await auth.signOut();
+  } catch (error) {
+      console.log(error)
+  }
+}
 
 //Class for the screen
 class ModalScreen extends React.Component {
@@ -27,6 +37,8 @@ class ModalScreen extends React.Component {
       long_market_value: 0,
       portfolio_value: 0,
 
+      positions: [],
+
       symbol: 0,
       qty: 0,
       market_val: 0,
@@ -44,13 +56,13 @@ class ModalScreen extends React.Component {
     //Use the account to get account data
     api.getAccount().then((response) => {
 
-      // console.log(response)
+      console.log(response)
 
       //Check the response
       if (response.ok) {
         //Set the state of the account
         this.setState({
-          buying_power: parseFloat(response.data.buying_power).toFixed(2),
+          buying_power: parseFloat(response.data.non_marginable_buying_power).toFixed(2),
           long_market_value: parseFloat(response.data.long_market_value).toFixed(2),
           portfolio_value: parseFloat(response.data.portfolio_value).toFixed(2),
           cash: parseFloat(response.data.cash).toFixed(2),
@@ -70,7 +82,7 @@ class ModalScreen extends React.Component {
     // Get our positions
     api.getPositions().then((pos_response) => {
 
-      console.log(pos_response.data)
+      // console.log(pos_response.data)
 
       var myClonedArray = Object.assign([], pos_response.data);
 
@@ -91,10 +103,29 @@ class ModalScreen extends React.Component {
         market_val: market_value,
       })
 
+      if (pos_response.ok) {
+        this.setState({
+          positions: pos_response.data
+        })
+      }
+
     })
 
-    console.log(pos_array)
+    // console.log(pos_array)
 
+  }
+
+  renderRow = ({item}) => {
+    return (
+      <View key={item.asset_id}>
+        <View>
+          <Text>{item.symbol}</Text>
+        </View>
+        <View>
+          <Text>{item.current_price}</Text>
+        </View>
+      </View>
+    )
   }
 
   //Output data
@@ -102,10 +133,19 @@ class ModalScreen extends React.Component {
     // return <View>
     //   <Text style={styles.title}>Dashboard Screen</Text>
     //   <View style={styles.separator}>
+
+    /*
+      {this.state.positions.map((position) => {
+        return <Text>
+          {position.symbol}
+        </Text>
+      })}
+
+    */
     return <View style={{ flex: 1, flexDirection: 'column' }}>
       <Text style={styles.title}>Alpaca Account Info</Text>
 
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, borderWidth: 1, borderColor: 'red' }}>
         <Text style={styles.container}>Buying Power</Text>
         <Text style={styles.cash}>${this.state.buying_power}</Text>
         <Text style={styles.container}>Cash</Text>
@@ -116,10 +156,10 @@ class ModalScreen extends React.Component {
         <Text style={styles.cash}>${this.state.portfolio_value}</Text>
       </View>
 
-      <View style={{ flex: 2 }}>
+      <View style={{ flex: 1, borderWidth: 1, borderColor: 'blue' }}>
         <Text style={styles.title}>Orders</Text>
-        <View style={{ flex: 1, flexDirection: 'row' }}>
-          <View style={{ flex: 1 }}>
+        <View style={{ flex: 2, flexDirection: 'row' }}>
+          <View style={{ flex: 1, borderWidth: 1, borderColor: 'orange' }}>
             <Text style={styles.container}>Symbol:</Text>
           </View>
           <View style={{ flex: 1 }}>
@@ -130,16 +170,25 @@ class ModalScreen extends React.Component {
           </View>
         </View>
         <View style={{ flex: 7, flexDirection: 'row' }}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.order}>{this.state.symbol}</Text>
+          <View style={{ flex: 1 }}><Text style={styles.order}>{this.state.symbol}</Text>
           </View>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.order}>{this.state.qty}</Text>
+          <View style={{ flex: 1 }}><Text style={styles.order}>{this.state.qty}</Text>
           </View>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.order}>${this.state.market_val}</Text>
+          <View style={{ flex: 1 }}><Text style={styles.order}>${this.state.market_val}</Text>
           </View>
         </View>
+      </View>
+
+      <View style={{ flex: 1, borderWidth: 1, borderColor: 'green' }}>
+
+        <FlatList
+          data = {this.state.positions}
+          renderItem = {this.renderRow}
+          keyExtractor = {item => item.asset_id}
+          
+        />
+
+      
       </View>
     </View>
 
