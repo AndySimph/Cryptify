@@ -1,28 +1,67 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { useState } from 'react';
+import { StyleSheet, TextInput, KeyboardAvoidingView, ScrollView, Text } from 'react-native';
+import { IconButton, InputField } from '../components'
 import { RootTabScreenProps } from '../types';
 import ExploreScreen from './ExploreScreen';
 import Chart from '../components/data_chart'
+import { View } from '../components/Themed';
+
+
 
 export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Coin'>) {
+    const [buyvis, setBuyVis] = useState(false);
+    const [amount, setAmount] = useState('');
+    const onBuy = async () => {
+        setBuyVis(amount !== "" && !isNaN(amount));
+        if (buyvis) {
+            console.log("$" + amount);
+            setAmount("");
+            //call BUY function here
+        }
+    };
+
     const item_id = route.params;
     return (
-        // <View style={styles.container}>
-        //     <Text style={styles.title}></Text>
-        //     <Text>{item_id.name}</Text>
-        //     <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        // </View >
-        
-        <Chart
-            currentPrice={item_id.currentPrice}
-            logoUrl={item_id.image}
-            name={item_id.name}
-            symbol={item_id.symbol}
-            priceChangePercentage7d={item_id.priceChangePercentage7d}
-            sparkline={item_id.sparkline}
-        />
-            
+        <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+            <ScrollView>
+                <Chart
+                    currentPrice={item_id.currentPrice}
+                    logoUrl={item_id.image}
+                    name={item_id.name}
+                    symbol={item_id.symbol}
+                    priceChangePercentage7d={item_id.priceChangePercentage7d}
+                    sparkline={item_id.sparkline}
+                />
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.text}>
+                        Buy
+                    </Text>
+                    <Text style={styles.textD}>
+                        $
+                    </Text>
+                    <TextInput
+                        style={styles.textInput}
+                        keyboardType='numeric'
+                        placeholder="0.00"
+                        value={amount}
+                        onChangeText={text => {
+                            setAmount(String(text));
+                            setBuyVis(amount != "");
+                        }}
+                    />
+                    <IconButton
+                        name='pluscircleo'
+                        size={32}
+                        color='#000'
+                        onPress={onBuy}
+                    />
+                </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
 
@@ -31,6 +70,26 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         //justifyContent: 'center',
+    },
+    text: {
+        fontSize: 25,
+        marginLeft: 20,
+        margin: 10
+    },
+    textD: {
+        fontSize: 25,
+        marginRight: 2,
+        margin: 12
+    },
+    textInput: {
+        height: 40,
+        width: 200,
+        margin: 10,
+        marginLeft: 0,
+        // borderWidth: .5,
+        fontSize: 20
+
+        // borderBottomColor: '#000000',
     },
     title: {
         fontSize: 20,
