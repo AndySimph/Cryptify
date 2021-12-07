@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { StyleSheet, TextInput, KeyboardAvoidingView, ScrollView, Text } from 'react-native';
-import { IconButton, InputField } from '../components'
+import { IconButton } from '../components'
 import { RootTabScreenProps } from '../types';
-import ExploreScreen from './ExploreScreen';
 import Chart from '../components/data_chart'
 import { View } from '../components/Themed';
 
@@ -12,9 +11,8 @@ import { View } from '../components/Themed';
 export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Coin'>) {
     const [buyvis, setBuyVis] = useState(false);
     const [amount, setAmount] = useState('');
-    var vis = false;
     const onBuy = async () => {
-        if (vis) {
+        if (buyvis) {
             console.log("$" + amount);
             setAmount("");
             //call BUY function here
@@ -49,7 +47,7 @@ export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Co
                         placeholder="0.00"
                         value={amount}
                         onChangeText={text => {
-                            vis = text != "";
+                            var vis = text != "";
                             setBuyVis(vis);
                             setAmount(String(text));
                         }}
