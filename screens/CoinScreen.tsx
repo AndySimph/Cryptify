@@ -12,9 +12,9 @@ import { View } from '../components/Themed';
 export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Coin'>) {
     const [buyvis, setBuyVis] = useState(false);
     const [amount, setAmount] = useState('');
+    var vis = false;
     const onBuy = async () => {
-        setBuyVis(amount !== "" && !isNaN(amount));
-        if (buyvis) {
+        if (vis) {
             console.log("$" + amount);
             setAmount("");
             //call BUY function here
@@ -49,14 +49,15 @@ export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Co
                         placeholder="0.00"
                         value={amount}
                         onChangeText={text => {
+                            vis = text != "";
+                            setBuyVis(vis);
                             setAmount(String(text));
-                            setBuyVis(amount != "");
                         }}
                     />
                     <IconButton
                         name='pluscircleo'
                         size={32}
-                        color='#000'
+                        color={buyvis ? '#000' : '#FFFFFF'}
                         onPress={onBuy}
                     />
                 </View>
