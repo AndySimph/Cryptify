@@ -102,7 +102,7 @@ class PortfolioScreen extends React.Component {
         <Text style={styles.cash}>${this.state.portfolio_value}</Text>
       </View>
 
-      <View style={{ flex: 2, padding: 5 /*, borderWidth: 1, borderColor: 'blue'*/ }}>
+      <View style={{ flex: 2.1, padding: 5 /*, borderWidth: 1, borderColor: 'blue'*/ }}>
         <Text style={styles.title}>Positions</Text>
 
         <View style={{ flex: 2, flexDirection: 'row' }}>

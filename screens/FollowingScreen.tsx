@@ -28,7 +28,7 @@ class FollowingScreen extends React.Component {
 
         api.getActivities().then((response) => {
             if (response.ok) {
-                // console.log(response)
+                console.log(response)
 
                 this.setState({
                     activities: response.data
@@ -41,8 +41,10 @@ class FollowingScreen extends React.Component {
     //Function to render a row for activities
     renderRow = ({item}) => {
         // console.log(item.id)
+        const transaction_color = (item.side == 'buy') ? 'blue' : 'orange';
+
         return (
-            <View key={item.id} style={styles.positions}>
+            <View key={item.id} style={[styles.positions, { borderColor: transaction_color }]}>
                 <View style={styles.positions_left}>
                     <Text style={styles.symbol}>{item.symbol}</Text>
                     <Text style={styles.subheading}>{(item.transaction_time).substring(0,10)}</Text>
@@ -54,7 +56,8 @@ class FollowingScreen extends React.Component {
                 </View>
 
                 <View style={styles.positions_right}>
-                    <Text style={styles.price}>${(item.price)}</Text>
+                    <Text style={styles.price}>${((item.price) * (item.qty)).toFixed(2)}</Text>
+                    <Text style={styles.subheading}>${(item.price)}</Text>
                 </View>
                 
             </View>
