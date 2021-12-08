@@ -79,7 +79,7 @@ class PortfolioScreen extends React.Component {
           <Text style={styles.subheading}>${(item.avg_entry_price * 1).toFixed(2)}</Text>
         </View>
         <View style={styles.positions_right}>
-          <Text style={[styles.price, { color: profit_color }]}>${item.current_price}</Text>
+          <Text style={[styles.price, { color: profit_color }]}>${(item.current_price * item.qty).toFixed(2)}</Text>
           <Text style={styles.subheading}>{(item.change_today * 100).toFixed(3)}</Text>
         </View>
       </View>
