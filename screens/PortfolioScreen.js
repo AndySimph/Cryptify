@@ -44,14 +44,14 @@ export default function PortfolioScreen() {
     };
     const uid = user.uid;
     //get document from database
-    const searchUser = () => {
-        db.collection('users').doc(uid).get().then((doc) => {
-            let userDetails = {};
-            userDetails = doc.data();
-            userDetails['balance'] = doc.data().balance;
-            setUserData(userDetails)
-        })
-    }
+    //const searchUser = () => {
+    db.collection('users').doc(uid).get().then((doc) => {
+        let userDetails = {};
+        userDetails = doc.data();
+        userDetails['balance'] = doc.data().balance;
+        setUserData(userDetails)
+    })
+    //}
     //function that increases balance
     const increaseBalance = () => {
         userData.balance = userData.balance + 1;
@@ -70,17 +70,7 @@ export default function PortfolioScreen() {
         <View style={styles.container}>
             <Text style={styles.title2}>{user.email}</Text>
             <Text style={styles.title}>Portfolio</Text>
-            <Button
-                onPress={searchUser}
-                backgroundColor='#bcbcbc'
-                title='Show Balance'
-                titleColor='#000'
-                titleSize={20}
-                width='50%'
-                containerStyle={{
-                    marginBottom: 5
-                }}
-            />
+            
             <Text style={styles.title}>Balance: {userData ? userData.balance : ''}</Text>
             <Button
                 onPress={increaseBalance}
