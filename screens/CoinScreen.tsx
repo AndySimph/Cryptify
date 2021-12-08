@@ -23,10 +23,11 @@ export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Co
             setBuyVis(false);
             // call BUY function here
             const api = alpacaApi();
+            // console.log((buyAmount / item_id.currentPrice).toFixed(4).toString());
             var data =
             {
                 symbol: (item_id.symbol).toUpperCase() + "USD",
-                notional: buyAmount,
+                qty: (buyAmount / item_id.currentPrice).toFixed(4).toString(),
                 side: "buy",
                 type: "market",
                 time_in_force: "gtc"
@@ -34,7 +35,7 @@ export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Co
             console.log(data);
             api.postOrders(data).then((response) => {
                 response
-                console.log(response)
+                console.log(response.ok)
             })
         }
     };
@@ -47,7 +48,7 @@ export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Co
             var data =
             {
                 symbol: (item_id.symbol).toUpperCase() + "USD",
-                notional: sellAmount,
+                qty: (sellAmount / item_id.currentPrice).toFixed(4).toString(),
                 side: "sell",
                 type: "market",
                 time_in_force: "gtc"
