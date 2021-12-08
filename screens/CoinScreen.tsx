@@ -11,6 +11,7 @@ import { View } from '../components/Themed';
 export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Coin'>) {
     const [buyvis, setBuyVis] = useState(false);
     const [amount, setAmount] = useState('');
+    const item_id = route.params;
     const onBuy = async () => {
         if (buyvis) {
             console.log("$" + amount);
@@ -19,7 +20,7 @@ export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Co
         }
     };
 
-    const item_id = route.params;
+    
     return (
         <KeyboardAvoidingView
             style={{ flex: 1 }}
