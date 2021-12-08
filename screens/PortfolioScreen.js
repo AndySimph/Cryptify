@@ -1,27 +1,8 @@
-//import * as React from 'react'
-import {useState} from 'react';
-//import { useContext } from 'react'
-//import { StyleSheet, Pressable } from 'react-native'
-
-//import { Text, View } from '../components/Themed'
-import { RootTabScreenProps } from '../types'
-import Firebase from '../services/firebase'
-import { IconButton, Button } from '../components'
-import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider'
-
-const auth = Firebase.auth();
-db = Firebase.firestore();
-
 //Import libraries for the alpaca API
-import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Platform, StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 import alpacaApi from '../services/alpaca';
 import { Text, View } from '../components/Themed';
-import { greaterThan } from 'react-native-reanimated';
-
-import apisauce from 'apisauce'
-import config from '../config.js'
 
 //Class for the screen
 class PortfolioScreen extends React.Component {
@@ -124,17 +105,19 @@ class PortfolioScreen extends React.Component {
       <View style={{ flex: 2, padding: 5 /*, borderWidth: 1, borderColor: 'blue'*/ }}>
         <Text style={styles.title}>Positions</Text>
 
-        <View style={{ flex: 1, flexDirection: 'row' }}>
+        <View style={{ flex: 2, flexDirection: 'row' }}>
           <View style={{ flex: 1 }}>
             <Text style={styles.container}>Symbol:</Text>
           </View>
           
           <View style={{ flex: 1 }}>
             <Text style={styles.container}>Shares:</Text>
+            <Text style={styles.subheading}>Price Bought @:</Text>
           </View>
 
           <View style={{ flex: 1 }}>
             <Text style={styles.container}>Market Value:</Text>
+            <Text style={styles.subheading}>Value Change:</Text>
           </View>
         </View>
 
@@ -184,7 +167,7 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   positions_mid: {
-    flex: 3,
+    flex: 2,
   },
   symbol: {
     fontSize: 16,

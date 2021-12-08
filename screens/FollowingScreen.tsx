@@ -78,7 +78,7 @@ class FollowingScreen extends React.Component {
                 </View>
 
                 <View style={{ flex: 1 }}>
-                    <Text style={styles.title}>Bought Price:</Text>
+                    <Text style={styles.title}>Transaction Price:</Text>
                 </View>
             </View>
 
