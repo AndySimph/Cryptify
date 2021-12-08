@@ -12,29 +12,7 @@ import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvide
 const auth = Firebase.auth();
 db = Firebase.firestore();
 
-//class that would store data from database document (only balance for now)
-/*class userData {
-    constructor(balance) {
-        this.balance = balance;
-    }
-    getBalance() {
-        return this.balance;
-    }
-}
-//function used to pull data from document and return new object with data
-var balanceGet = {
-    fromFirestore: function(snapshot, options){
-        const data = snapshot.data(options)
-        return new userData(data.balance);
-    }
-}
-*/
-
 export default function PortfolioScreen() {
-    /* this.state = {
-        balance: 0
-    } */
-    let [userData, setUserData] = useState({});
     const { user } = useContext(AuthenticatedUserContext);
     const handleSignOut = async () => {
         try {
@@ -44,6 +22,7 @@ export default function PortfolioScreen() {
         }
     };
     const uid = user.uid;
+    /*let [userData, setUserData] = useState({});
     //get document from database
     const searchUser = () => {
         db.collection('users').doc(uid).get().then((doc) => {
@@ -65,35 +44,12 @@ export default function PortfolioScreen() {
                         })
                     }
                 });
-    }
+    }*/
     //text with {balance} would display balance of the user
     return (
         <View style={styles.container}>
             <Text style={styles.title2}>{user.email}</Text>
             <Text style={styles.title}>Portfolio</Text>
-            <Button
-                onPress={searchUser}
-                backgroundColor='#bcbcbc'
-                title='Show Balance'
-                titleColor='#000'
-                titleSize={20}
-                width='50%'
-                containerStyle={{
-                    marginBottom: 5
-                }}
-            />
-            <Text style={styles.title}>Balance: {userData ? userData.balance : ''}</Text>
-            <Button
-                onPress={increaseBalance}
-                backgroundColor='#bcbcbc'
-                title='Increase Balance'
-                titleColor='#000'
-                titleSize={20}
-                width='50%'
-                containerStyle={{
-                    marginBottom: 5
-                }}
-            />
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <IconButton
                 onPress={handleSignOut}
@@ -124,14 +80,29 @@ const styles = StyleSheet.create({
         width: '80%',
     },
 })
-//button that was going to be for testing
-    /* <Button
-                
+
+/*
+<Button
+                onPress={searchUser}
                 backgroundColor='#bcbcbc'
-                title='Increase'
+                title='Show Balance'
                 titleColor='#000'
                 titleSize={20}
+                width='50%'
                 containerStyle={{
-                    marginBottom: 24
+                    marginBottom: 5
                 }}
-            /> */
+            />
+            <Text style={styles.title}>Balance: {userData ? userData.balance : ''}</Text>
+            <Button
+                onPress={increaseBalance}
+                backgroundColor='#bcbcbc'
+                title='Increase Balance'
+                titleColor='#000'
+                titleSize={20}
+                width='50%'
+                containerStyle={{
+                    marginBottom: 5
+                }}
+            />
+*/
