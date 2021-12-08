@@ -5,22 +5,65 @@ import { IconButton } from '../components'
 import { RootTabScreenProps } from '../types';
 import Chart from '../components/data_chart'
 import { View } from '../components/Themed';
+import alpacaApi from '../services/alpaca';
+
 
 
 
 export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Coin'>) {
-    const [buyvis, setBuyVis] = useState(false);
-    const [amount, setAmount] = useState('');
     const item_id = route.params;
+
+    const [buyVis, setBuyVis] = useState(false);
+    const [buyAmount, setBuyAmount] = useState('');
+    const [sellVis, setSellVis] = useState(false);
+    const [sellAmount, setSellAmount] = useState('');
     const onBuy = async () => {
-        if (buyvis) {
-            console.log("$" + amount);
-            setAmount("");
-            //call BUY function here
+        if (buyVis) {
+            setBuyAmount("");
+            setBuyVis(false);
+            // call BUY function here
+            const api = alpacaApi();
+            var data =
+            {
+                symbol: (item_id.symbol).toUpperCase() + "USD",
+                notional: buyAmount,
+                side: "buy",
+                type: "market",
+                time_in_force: "gtc"
+            };
+            console.log(data);
+            api.postOrders(data).then((response) => {
+                response
+                console.log(response)
+            })
+        }
+    };
+    const onSell = async () => {
+        if (sellVis) {
+            setSellAmount("");
+            setSellVis(false);
+            // call BUY function here
+            const api = alpacaApi();
+            var data =
+            {
+                symbol: (item_id.symbol).toUpperCase() + "USD",
+                notional: sellAmount,
+                side: "sell",
+                type: "market",
+                time_in_force: "gtc"
+            };
+            console.log(data);
+            api.postOrders(data).then((response) => {
+                response
+                console.log(response)
+            })
         }
     };
 
-    
+
+
+
+
     return (
         <KeyboardAvoidingView
             style={{ flex: 1 }}
@@ -46,18 +89,43 @@ export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Co
                         style={styles.textInput}
                         keyboardType='numeric'
                         placeholder="0.00"
-                        value={amount}
+                        value={buyAmount}
                         onChangeText={text => {
                             var vis = text != "";
                             setBuyVis(vis);
-                            setAmount(String(text));
+                            setBuyAmount(String(text));
                         }}
                     />
                     <IconButton
-                        name='pluscircleo'
+                        name='checkcircleo'
                         size={32}
-                        color={buyvis ? '#000' : '#FFFFFF'}
+                        color={buyVis ? '#00FF00' : '#FFFFFF'}
                         onPress={onBuy}
+                    />
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={styles.text}>
+                        Sell
+                    </Text>
+                    <Text style={styles.textD}>
+                        $
+                    </Text>
+                    <TextInput
+                        style={styles.textInput}
+                        keyboardType='numeric'
+                        placeholder="0.00"
+                        value={sellAmount}
+                        onChangeText={text => {
+                            var vis = text != "";
+                            setSellVis(vis);
+                            setSellAmount(String(text));
+                        }}
+                    />
+                    <IconButton
+                        name='checkcircleo'
+                        size={32}
+                        color={sellVis ? '#FF0000' : '#FFFFFF'}
+                        onPress={onSell}
                     />
                 </View>
             </ScrollView>
