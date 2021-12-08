@@ -21,23 +21,23 @@ var articles = require("../articles.json");
 
 export default function RecommendedScreen({ navigation }: RootTabScreenProps<'Recommended'>) {
     //Uses
-    var link1:string = articles[0]['url'];
-    var link2:string = articles[1]['url'];
-    var link3:string = articles[2]['url'];
-    var link4:string = articles[3]['url'];
-    var link5:string = articles[4]['url'];
+    var link1: string = articles[0]['url'];
+    var link2: string = articles[1]['url'];
+    var link3: string = articles[2]['url'];
+    var link4: string = articles[3]['url'];
+    var link5: string = articles[4]['url'];
 
-    var title1:string = articles[0]['title'];
-    var title2:string = articles[1]['title'];
-    var title3:string = articles[2]['title'];
-    var title4:string = articles[3]['title'];
-    var title5:string = articles[4]['title'];
+    var title1: string = articles[0]['title'];
+    var title2: string = articles[1]['title'];
+    var title3: string = articles[2]['title'];
+    var title4: string = articles[3]['title'];
+    var title5: string = articles[4]['title'];
 
-    var desc1:string = articles[0]['description'];
-    var desc2:string = articles[1]['description'];
-    var desc3:string = articles[2]['description'];
-    var desc4:string = articles[3]['description'];
-    var desc5:string = articles[4]['description'];
+    var desc1: string = articles[0]['description'];
+    var desc2: string = articles[1]['description'];
+    var desc3: string = articles[2]['description'];
+    var desc4: string = articles[3]['description'];
+    var desc5: string = articles[4]['description'];
 
     return (
         <View style={styles.container}>
@@ -76,6 +76,7 @@ export default function RecommendedScreen({ navigation }: RootTabScreenProps<'Re
 
 const styles = StyleSheet.create({
     container: {
+        margin: 7.5,
         flex: 1,
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
