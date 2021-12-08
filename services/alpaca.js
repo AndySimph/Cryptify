@@ -14,6 +14,7 @@ const alpacaApi = (baseURL = config.BASE_URL) => {
 
     const getAccount = () => api.get('v2/account')
     const getPositions = () => api.get('v2/positions')
+    const getActivities = () => api.get('v2/account/activities')
 
     // const create_order = (symbol, qty, side, type, time_in_force) => api.get('v2/orders')
     //     data = {
@@ -27,7 +28,8 @@ const alpacaApi = (baseURL = config.BASE_URL) => {
 
     return {
         getAccount,
-        getPositions
+        getPositions,
+        getActivities
     }
 }
 

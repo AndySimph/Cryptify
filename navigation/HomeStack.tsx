@@ -17,6 +17,8 @@ import RecommendedScreen from '../screens/RecommendedScreen'
 import LinkingConfiguration from './LinkingConfiguration';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 
+import Firebase from '../services/firebase'
+
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
@@ -27,6 +29,18 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
     </NavigationContainer>
   );
 }
+
+const auth = Firebase.auth();
+db = Firebase.firestore();
+
+
+const handleSignOut = async () => {
+  try {
+      await auth.signOut();
+  } catch (error) {
+      console.log(error)
+  }
+};
 
 const Stack = createStackNavigator<RootStackParamList>();
 function HomeStack() {
@@ -63,12 +77,12 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate('Modal')}
+              onPress={handleSignOut}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}>
               <FontAwesome
-                name="info-circle"
+                name="sign-out"
                 size={25}
                 color={Colors[colorScheme].text}
                 style={{ marginRight: 15 }}
@@ -101,10 +115,10 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="Following"
+        name="History"
         component={FollowingScreen}
         options={{
-          title: 'Following',
+          title: 'History',
           tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
         }}
       />

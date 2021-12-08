@@ -9,16 +9,6 @@ import { greaterThan } from 'react-native-reanimated';
 import apisauce from 'apisauce'
 import config from '../config.js'
 
-import { IconButton } from '../components'
-
-const handleSignOut = async () => {
-  try {
-      await auth.signOut();
-  } catch (error) {
-      console.log(error)
-  }
-}
-
 //Class for the screen
 class ModalScreen extends React.Component {
 
@@ -37,13 +27,7 @@ class ModalScreen extends React.Component {
       long_market_value: 0,
       portfolio_value: 0,
 
-      positions: [],
-
-      symbol: 0,
-      qty: 0,
-      market_val: 0,
-
-
+      positions: []
     }
 
   }
@@ -56,7 +40,7 @@ class ModalScreen extends React.Component {
     //Use the account to get account data
     api.getAccount().then((response) => {
 
-      console.log(response)
+      // console.log(response)
 
       //Check the response
       if (response.ok) {
@@ -68,61 +52,40 @@ class ModalScreen extends React.Component {
           cash: parseFloat(response.data.cash).toFixed(2),
 
         })
-
-        // console.log(this)
       }
     })
-
-
-    var sym
-    var quant
-    var market_value
-    var pos_array = []
-
+    
     // Get our positions
     api.getPositions().then((pos_response) => {
 
       // console.log(pos_response.data)
 
-      var myClonedArray = Object.assign([], pos_response.data);
-
-      pos_array = Object.assign([], pos_response.data);
-
-      // console.log(pos_array)
-
-      pos_response.data.forEach(function (object) {
-        // console.log(`${object.qty} shares of ${object.symbol}`)
-        sym = object.symbol
-        quant = object.qty
-        market_value = parseFloat(object.market_value).toFixed(2)
-      });
-
-      this.setState({
-        symbol: sym,
-        qty: quant,
-        market_val: market_value,
-      })
-
+      //Get the position data
       if (pos_response.ok) {
         this.setState({
           positions: pos_response.data
         })
       }
-
     })
-
-    // console.log(pos_array)
-
   }
 
+  //Function to render a row for positions
   renderRow = ({item}) => {
+    //Get color of the profit gain or loss
+    const profit_color = ((item.change_today * 100) > 0) ? 'green' : 'red';
+
     return (
-      <View key={item.asset_id}>
-        <View>
-          <Text>{item.symbol}</Text>
+      <View key={item.asset_id} style={styles.positions}>
+        <View style={styles.positions_left}>
+          <Text style={styles.symbol}>{item.symbol}</Text>
         </View>
-        <View>
-          <Text>{item.current_price}</Text>
+        <View style={styles.positions_mid}>
+          <Text>{item.qty}</Text>
+          <Text style={styles.subheading}>${(item.avg_entry_price * 1).toFixed(2)}</Text>
+        </View>
+        <View style={styles.positions_right}>
+          <Text style={[styles.price, { color: profit_color }]}>${item.current_price}</Text>
+          <Text style={styles.subheading}>{(item.change_today * 100).toFixed(3)}</Text>
         </View>
       </View>
     )
@@ -130,22 +93,10 @@ class ModalScreen extends React.Component {
 
   //Output data
   render() {
-    // return <View>
-    //   <Text style={styles.title}>Dashboard Screen</Text>
-    //   <View style={styles.separator}>
-
-    /*
-      {this.state.positions.map((position) => {
-        return <Text>
-          {position.symbol}
-        </Text>
-      })}
-
-    */
     return <View style={{ flex: 1, flexDirection: 'column' }}>
       <Text style={styles.title}>Alpaca Account Info</Text>
 
-      <View style={{ flex: 1, borderWidth: 1, borderColor: 'red' }}>
+      <View style={{ flex: 1 /*, borderWidth: 1, borderColor: 'red'*/ }}>
         <Text style={styles.container}>Buying Power</Text>
         <Text style={styles.cash}>${this.state.buying_power}</Text>
         <Text style={styles.container}>Cash</Text>
@@ -156,40 +107,34 @@ class ModalScreen extends React.Component {
         <Text style={styles.cash}>${this.state.portfolio_value}</Text>
       </View>
 
-      <View style={{ flex: 1, borderWidth: 1, borderColor: 'blue' }}>
-        <Text style={styles.title}>Orders</Text>
-        <View style={{ flex: 2, flexDirection: 'row' }}>
-          <View style={{ flex: 1, borderWidth: 1, borderColor: 'orange' }}>
+      <View style={{ flex: 2.25 /*, borderWidth: 1, borderColor: 'blue'*/ }}>
+        <Text style={styles.title}>Positions</Text>
+
+        <View style={{ flex: 1, flexDirection: 'row' }}>
+          <View style={{ flex: 1 }}>
             <Text style={styles.container}>Symbol:</Text>
           </View>
+          
           <View style={{ flex: 1 }}>
             <Text style={styles.container}>Shares:</Text>
           </View>
+
           <View style={{ flex: 1 }}>
             <Text style={styles.container}>Market Value:</Text>
           </View>
         </View>
-        <View style={{ flex: 7, flexDirection: 'row' }}>
-          <View style={{ flex: 1 }}><Text style={styles.order}>{this.state.symbol}</Text>
-          </View>
-          <View style={{ flex: 1 }}><Text style={styles.order}>{this.state.qty}</Text>
-          </View>
-          <View style={{ flex: 1 }}><Text style={styles.order}>${this.state.market_val}</Text>
-          </View>
+
+        <View style={{ flex: 10, flexDirection: 'row' }}>
+          <FlatList
+            data = {this.state.positions}
+            renderItem = {this.renderRow}
+            keyExtractor = {item => item.asset_id}
+          />
+
         </View>
+
       </View>
 
-      <View style={{ flex: 1, borderWidth: 1, borderColor: 'green' }}>
-
-        <FlatList
-          data = {this.state.positions}
-          renderItem = {this.renderRow}
-          keyExtractor = {item => item.asset_id}
-          
-        />
-
-      
-      </View>
     </View>
 
   }
@@ -206,15 +151,36 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
   cash: {
     color: 'green',
   },
-  order: {
-    color: 'grey',
+  positions: {
+    flex: 1,
+    flexDirection: 'row',
+    margin: 5,
+    borderWidth: 1,
+    padding: 5,
+    borderRadius: 10,
+  },
+  positions_left: {
+    flex: 2,
+  },
+  positions_right: {
+    flex: 2,
+  },
+  positions_mid: {
+    flex: 3,
+  },
+  symbol: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  subheading: {
+    color: '#808080'
   },
 });
