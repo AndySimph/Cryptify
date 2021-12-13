@@ -5,6 +5,7 @@ import { Platform, StyleSheet, FlatList } from 'react-native';
 import alpacaApi from '../services/alpaca';
 import { Text, View } from '../components/Themed';
 import { greaterThan } from 'react-native-reanimated';
+import { IconButton, Button } from '../components'
 
 import apisauce from 'apisauce'
 import config from '../config.js'
@@ -28,7 +29,7 @@ class FollowingScreen extends React.Component {
 
         api.getActivities().then((response) => {
             if (response.ok) {
-                console.log(response)
+                // console.log(response)
 
                 this.setState({
                     activities: response.data
@@ -67,7 +68,6 @@ class FollowingScreen extends React.Component {
     render() {
 
         return <View style={{ flex: 1, flexDirection: 'column' }}>
-            {/* <Text style={styles.title}>Alpaca Account History</Text> */}
 
             <View style={{ flex: 1, flexDirection: 'row', padding: 5 }}>
                 <View style={{ flex: 1 }}>
