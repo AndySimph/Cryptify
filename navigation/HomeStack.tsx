@@ -10,7 +10,6 @@ import useColorScheme from '../hooks/useColorScheme';
 import PortfolioScreen from '../screens/PortfolioScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import FollowingScreen from '../screens/FollowingScreen';
-import ModalScreen from '../screens/ModalScreen';
 import CoinScreen from '../screens/CoinScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import RecommendedScreen from '../screens/RecommendedScreen'
@@ -33,7 +32,6 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const auth = Firebase.auth();
 db = Firebase.firestore();
 
-
 const handleSignOut = async () => {
   try {
       await auth.signOut();
@@ -49,9 +47,6 @@ function HomeStack() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="Coin" component={CoinScreen} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'card' }}>
         <Stack.Screen name="Recommended" component={RecommendedScreen} />
       </Stack.Group>
