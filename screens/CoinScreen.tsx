@@ -7,9 +7,6 @@ import Chart from '../components/data_chart'
 import { View } from '../components/Themed';
 import alpacaApi from '../services/alpaca';
 
-
-
-
 export default function CoinScreen({ route, navigation }: RootTabScreenProps<'Coin'>) {
     const item_id = route.params;
 
