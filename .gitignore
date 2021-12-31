@@ -12,6 +12,7 @@ firebase.env
 
 config.js
 package-lock.json
+articles.json
 
 # macOS
 .DS_Store

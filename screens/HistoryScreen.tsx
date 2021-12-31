@@ -10,7 +10,8 @@ import { IconButton, Button } from '../components'
 import apisauce from 'apisauce'
 import config from '../config.js'
 
-class FollowingScreen extends React.Component {
+// class FollowingScreen extends React.Component {
+class HistoryScreen extends React.Component {
 
     static navigationOptions = {
         title: 'Account History'
@@ -97,8 +98,8 @@ class FollowingScreen extends React.Component {
         </View>
     }
 }
-
-export default FollowingScreen
+export default HistoryScreen
+// export default FollowingScreen
 
 const styles = StyleSheet.create({
     container: {

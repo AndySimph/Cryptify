@@ -25,9 +25,9 @@ const linking: LinkingOptions<RootStackParamList> = {
               ExploreScreen: 'explore',
             },
           },
-          Following: {
+          History: {
             screens: {
-              FollowingScreen: 'following'
+              FollowingScreen: 'history'
             },
           },
         },

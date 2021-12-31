@@ -9,7 +9,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import PortfolioScreen from '../screens/PortfolioScreen';
 import ExploreScreen from '../screens/ExploreScreen';
-import FollowingScreen from '../screens/FollowingScreen';
+import HistoryScreen from '../screens/HistoryScreen';
 import CoinScreen from '../screens/CoinScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import RecommendedScreen from '../screens/RecommendedScreen'
@@ -111,7 +111,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="History"
-        component={FollowingScreen}
+        component={HistoryScreen}
         options={{
           title: 'History',
           tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
