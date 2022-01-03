@@ -88,10 +88,10 @@ class PortfolioScreen extends React.Component {
 
   //Output data
   render() {
-    return <View style={{ flex: 1, flexDirection: 'column' }}>
-      <Text style={styles.title}>Alpaca Account Info</Text>
+    return <View style={{ flex: 1, flexDirection: 'column', }}>
+      {/* <Text style={styles.title}>Alpaca Account Info</Text> */}
 
-      <View style={{ flex: 1, padding: 5 /*, borderWidth: 1, borderColor: 'red'*/ }}>
+      <View style={{ flex: 1, padding: 5, backgroundColor: '#F2F2F2' }}>
         <Text style={styles.container}>Buying Power</Text>
         <Text style={styles.cash}>${this.state.buying_power}</Text>
         <Text style={styles.container}>Cash</Text>
@@ -102,26 +102,25 @@ class PortfolioScreen extends React.Component {
         <Text style={styles.cash}>${this.state.portfolio_value}</Text>
       </View>
 
-      <View style={{ flex: 2.1, padding: 5 /*, borderWidth: 1, borderColor: 'blue'*/ }}>
-        <Text style={styles.title}>Positions</Text>
+      <View style={{ flex: 2.1, padding: 5, backgroundColor: '#F2F2F2' }}>
 
-        <View style={{ flex: 2, flexDirection: 'row' }}>
-          <View style={{ flex: 1 }}>
+        <View style={{ flex: 2, flexDirection: 'row', backgroundColor: '#F2F2F2' }}>
+          <View style={{ flex: 1, backgroundColor: '#F2F2F2' }}>
             <Text style={styles.container}>Symbol:</Text>
           </View>
           
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, backgroundColor: '#F2F2F2'  }}>
             <Text style={styles.container}>Shares:</Text>
             <Text style={styles.subheading}>Price Bought @:</Text>
           </View>
 
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, backgroundColor: '#F2F2F2'  }}>
             <Text style={styles.container}>Market Value:</Text>
             <Text style={styles.subheading}>Value Change:</Text>
           </View>
         </View>
 
-        <View style={{ flex: 10, flexDirection: 'row' }}>
+        <View style={{ flex: 10, flexDirection: 'row', backgroundColor: '#F2F2F2' }}>
           <FlatList
             data = {this.state.positions}
             renderItem = {this.renderRow}
@@ -179,6 +178,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   subheading: {
-    color: '#808080'
+    color: '#808080',
   },
 });
