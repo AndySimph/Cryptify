@@ -47,17 +47,17 @@ class HistoryScreen extends React.Component {
 
         return (
             <View key={item.id} style={[styles.positions, { borderColor: transaction_color }]}>
-                <View style={styles.positions_left}>
+                <View style={{ flex: 1 }}>
                     <Text style={styles.symbol}>{item.symbol}</Text>
                     <Text style={styles.subheading}>{(item.transaction_time).substring(0,10)}</Text>
                 </View>
                 
-                <View style={styles.positions_mid}>
+                <View style={{ flex: 1 }}>
                     <Text>{item.qty}</Text>
                     <Text style={styles.subheading}>{(item.side).charAt(0).toUpperCase() + (item.side).slice(1)}</Text>
                 </View>
 
-                <View style={styles.positions_right}>
+                <View style={{ flex: 1 }}>
                     <Text style={styles.price}>${((item.price) * (item.qty)).toFixed(2)}</Text>
                     <Text style={styles.subheading}>${(item.price)}</Text>
                 </View>
@@ -102,20 +102,10 @@ export default HistoryScreen
 // export default FollowingScreen
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
     },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
-    },  
     positions: {
         flex: 1,
         flexDirection: 'row',
@@ -123,15 +113,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         padding: 5,
         borderRadius: 10,
-      },
-      positions_left: {
-        flex: 1,
-      },
-      positions_right: {
-        flex: 1,
-      },
-      positions_mid: {
-        flex: 1,
       },
       symbol: {
         fontSize: 16,

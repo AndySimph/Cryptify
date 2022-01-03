@@ -71,14 +71,14 @@ class PortfolioScreen extends React.Component {
 
     return (
       <View key={item.asset_id} style={styles.positions}>
-        <View style={styles.positions_left}>
+        <View style={{ flex: 1 }}>
           <Text style={styles.symbol}>{item.symbol}</Text>
         </View>
-        <View style={styles.positions_mid}>
+        <View style={{ flex: 1 }}>
           <Text>{item.qty}</Text>
           <Text style={styles.subheading}>${(item.avg_entry_price * 1).toFixed(2)}</Text>
         </View>
-        <View style={styles.positions_right}>
+        <View style={{ flex: 1 }}>
           <Text style={[styles.price, { color: profit_color }]}>${(item.current_price * item.qty).toFixed(2)}</Text>
           <Text style={styles.subheading}>{(item.change_today * 100).toFixed(3)}</Text>
         </View>
@@ -163,15 +163,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 5,
     borderRadius: 10,
-  },
-  positions_left: {
-    flex: 2,
-  },
-  positions_right: {
-    flex: 2,
-  },
-  positions_mid: {
-    flex: 2,
   },
   symbol: {
     fontSize: 16,
