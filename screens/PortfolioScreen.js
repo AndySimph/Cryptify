@@ -88,33 +88,38 @@ class PortfolioScreen extends React.Component {
 
   //Output data
   render() {
-    return <View style={{ flex: 1, flexDirection: 'column', }}>
-      {/* <Text style={styles.title}>Alpaca Account Info</Text> */}
+    return <View style={{ flex: 1, flexDirection: 'column' }}>
 
-      <View style={{ flex: 1, padding: 5, backgroundColor: '#F2F2F2' }}>
-        <Text style={styles.container}>Buying Power</Text>
-        <Text style={styles.cash}>${this.state.buying_power}</Text>
-        <Text style={styles.container}>Cash</Text>
-        <Text style={styles.cash}>${this.state.cash}</Text>
-        <Text style={styles.container}>Long Market Value</Text>
-        <Text style={styles.cash}>${this.state.long_market_value}</Text>
-        <Text style={styles.container}>Portfolio Value</Text>
-        <Text style={styles.cash}>${this.state.portfolio_value}</Text>
+      <View style={{ flex: .45, padding: 5, flexDirection: 'row', backgroundColor: '#F2F2F2' }}>
+        
+        <View style={{flex: 1, flexDirection: 'column', backgroundColor: '#F2F2F2' }}>
+          <Text style={styles.container}>Buying Power</Text>
+          <Text style={styles.cash}>${this.state.buying_power}</Text>
+          <Text style={styles.container}>Cash</Text>
+          <Text style={styles.cash}>${this.state.cash}</Text>
+        </View>
+
+        <View style={{flex: 1, flexDirection: 'column', backgroundColor: '#F2F2F2' }}>
+          <Text style={styles.container}>Long Market Value</Text>
+          <Text style={styles.cash}>${this.state.long_market_value}</Text>
+          <Text style={styles.container}>Portfolio Value</Text>
+          <Text style={styles.cash}>${this.state.portfolio_value}</Text>
+        </View>
       </View>
 
-      <View style={{ flex: 2.1, padding: 5, backgroundColor: '#F2F2F2' }}>
-
-        <View style={{ flex: 2, flexDirection: 'row', backgroundColor: '#F2F2F2' }}>
+      <View style={{ flex: 2.5, padding: 5, backgroundColor: '#F2F2F2' }}>
+      
+        <View style={{ flex: 1, flexDirection: 'row' }}>
           <View style={{ flex: 1, backgroundColor: '#F2F2F2' }}>
             <Text style={styles.container}>Symbol:</Text>
           </View>
           
-          <View style={{ flex: 1, backgroundColor: '#F2F2F2'  }}>
+          <View style={{ flex: 1, backgroundColor: '#F2F2F2' }}>
             <Text style={styles.container}>Shares:</Text>
             <Text style={styles.subheading}>Price Bought @:</Text>
           </View>
 
-          <View style={{ flex: 1, backgroundColor: '#F2F2F2'  }}>
+          <View style={{ flex: 1, backgroundColor: '#F2F2F2' }}>
             <Text style={styles.container}>Market Value:</Text>
             <Text style={styles.subheading}>Value Change:</Text>
           </View>
