@@ -70,24 +70,24 @@ class HistoryScreen extends React.Component {
 
         return <View style={{ flex: 1, flexDirection: 'column' }}>
 
-            <View style={{ flex: 1, flexDirection: 'row', padding: 5 }}>
-                <View style={{ flex: 1 }}>
+            <View style={{ flex: .75, flexDirection: 'row', padding: 5, backgroundColor: '#F2F2F2' }}>
+                <View style={{ flex: 1, backgroundColor: '#F2F2F2' }}>
                     <Text style={styles.title}>Symbol:</Text>
                     <Text style={styles.subheading}>Date:</Text>
                 </View>
                 
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, backgroundColor: '#F2F2F2' }}>
                     <Text style={styles.title}>Shares:</Text>
                     <Text style={styles.subheading}>Transaction Type:</Text>
                 </View>
 
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, backgroundColor: '#F2F2F2' }}>
                     <Text style={styles.title}>Transaction Price:</Text>
                 </View>
             </View>
 
 
-            <View style={{ flex: 10 }}>
+            <View style={{ flex: 10, backgroundColor: '#F2F2F2' }}>
                 <FlatList
                     data = {this.state.activities}
                     renderItem = {this.renderRow}
