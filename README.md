@@ -1,7 +1,7 @@
 # Cryptify
 Repository for a stock program that will be able to predict the trends of stocks, mainly crypto.
 
-Type to install these libraries that are required for the application
+Type to install these libraries that are required for the application, this application uses node version 14.17.6
 
 npm install -g expo-cli
 
