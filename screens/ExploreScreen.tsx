@@ -4,10 +4,13 @@ import React, { useRef, useMemo, useState, useEffect } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
-import { getMarketData } from '../services/coingecko';
+import coinGeckoApi from '../services/coingecko';
 import ListItem from '../components/ListCoins';
+
 //Function to get set the explore screen
 export default function ExploreScreen({ navigation }: RootTabScreenProps<'Explore'>) {
+  //Declare the api used
+  const api = coinGeckoApi()
 
   //Declare data
   const [data, setData] = useState([]);
@@ -15,7 +18,7 @@ export default function ExploreScreen({ navigation }: RootTabScreenProps<'Explor
   //Get data
   useEffect(() => {
     const fetchMarketData = async () => {
-      const marketData = await getMarketData();
+      const marketData = await api.getMarketData();
 
       setData(marketData);
     }
@@ -34,7 +37,6 @@ export default function ExploreScreen({ navigation }: RootTabScreenProps<'Explor
       sparkline: item?.sparkline_in_7d.price,
     });
   }
-
 
   return (
     //Create the list
