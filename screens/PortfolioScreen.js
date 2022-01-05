@@ -53,7 +53,7 @@ class PortfolioScreen extends React.Component {
     // Get our positions
     api.getPositions().then((pos_response) => {
 
-        //console.log(pos_response.data)
+        // console.log(pos_response.data)
 
         //Get the position data
         if (pos_response.ok) {

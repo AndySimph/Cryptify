@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
+        backgroundColor: '#F2F2F2',
     },
     link: {
         fontSize: 16,
