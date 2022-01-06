@@ -37,7 +37,7 @@ const formatMarketData = (data) => {
   return formattedData;
 }
 
-//Get the data
+//Get the market data
 const getMarketData = async () => {
   try {
     //api call using requested link
@@ -54,10 +54,30 @@ const getMarketData = async () => {
   }
 }
 
+//Get data of a coin
+const getCoinData = async () => {
+  try {
+    //api call using requested link
+    const response = await axios.get("https://api.coingecko.com/api/v3/coins/bitcoin");
+
+    const data = response.data;
+
+    // const formattedResponse = formatMarketData(data);
+
+    console.log(data)
+
+    return data;
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 const coinGeckoApi = () => {
 
   return {
-      getMarketData
+      getMarketData,
+      getCoinData
   }
 }
 
