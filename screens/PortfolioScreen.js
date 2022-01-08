@@ -67,12 +67,17 @@ class PortfolioScreen extends React.Component {
         }
     })
 
-    coinapi.getCoinData().then((coinData) => {
+    const string_name = 'bitcoin'
+
+    coinapi.getCoinData(string_name).then((coinData) => {
       if (coinData) {
         console.log(coinData.image.large)
         this.setState({
           pic: coinData.image.large,
         })
+
+        temp_str = "https://api.coingecko.com/api/v3/coins/"
+        console.log(temp_str+'bitcoin')
       }
 
     })
