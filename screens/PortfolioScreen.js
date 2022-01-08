@@ -1,8 +1,9 @@
 //Import libraries for the alpaca API
 import * as React from 'react';
-import { StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList, Image } from 'react-native';
 import alpacaApi from '../services/alpaca';
 import { Text, View } from '../components/Themed';
+import coinGeckoApi from '../services/coingecko';
 
 //Class for the screen
 class PortfolioScreen extends React.Component {
@@ -22,7 +23,8 @@ class PortfolioScreen extends React.Component {
       long_market_value: 0,
       portfolio_value: 0,
 
-      positions: []
+      positions: [],
+      pic: '',
     }
 
   }
@@ -30,6 +32,8 @@ class PortfolioScreen extends React.Component {
   //Get the data from the API
   componentDidMount() {
 
+    //Declare the api used
+    const coinapi = coinGeckoApi()
     const api = alpacaApi()
 
     //Use the account to get account data
@@ -41,10 +45,10 @@ class PortfolioScreen extends React.Component {
         if (response.ok) {
             //Set the state of the account
             this.setState({
-            buying_power: parseFloat(response.data.non_marginable_buying_power).toFixed(2),
-            long_market_value: parseFloat(response.data.long_market_value).toFixed(2),
-            portfolio_value: parseFloat(response.data.portfolio_value).toFixed(2),
-            cash: parseFloat(response.data.cash).toFixed(2),
+              buying_power: parseFloat(response.data.non_marginable_buying_power).toFixed(2),
+              long_market_value: parseFloat(response.data.long_market_value).toFixed(2),
+              portfolio_value: parseFloat(response.data.portfolio_value).toFixed(2),
+              cash: parseFloat(response.data.cash).toFixed(2),
 
             })
         }
@@ -57,10 +61,20 @@ class PortfolioScreen extends React.Component {
 
         //Get the position data
         if (pos_response.ok) {
-            this.setState({
+          this.setState({
             positions: pos_response.data
-            })
+          })
         }
+    })
+
+    coinapi.getCoinData().then((coinData) => {
+      if (coinData) {
+        console.log(coinData.image.large)
+        this.setState({
+          pic: coinData.image.large,
+        })
+      }
+
     })
   }
 
@@ -134,6 +148,10 @@ class PortfolioScreen extends React.Component {
 
         </View>
 
+        <View style={{ flex: 10, flexDirection: 'row', backgroundColor: '#F2F2F2' }}>
+
+          <Image source={this.state.pic ? {uri: this.state.pic } : null} style={styles.image} />
+        </View>
       </View>
 
     </View>
@@ -175,5 +193,9 @@ const styles = StyleSheet.create({
   },
   subheading: {
     color: '#808080',
+  },
+  image: {
+    height: 48,
+    width: 48,
   },
 });

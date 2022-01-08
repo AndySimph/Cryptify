@@ -64,7 +64,7 @@ const getCoinData = async () => {
 
     // const formattedResponse = formatMarketData(data);
 
-    console.log(data)
+    // console.log(data.image)
 
     return data;
 
