@@ -57,7 +57,7 @@ const getMarketData = async () => {
 //Get data of a coin
 const getCoinData = async (coin_name) => {
   try {
-    console.log('here'+coin_name)
+    // console.log('here'+coin_name)
     //api call using requested link
     const response = await axios.get("https://api.coingecko.com/api/v3/coins/"+coin_name);
 

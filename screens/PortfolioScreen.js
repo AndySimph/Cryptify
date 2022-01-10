@@ -65,28 +65,77 @@ class PortfolioScreen extends React.Component {
             positions: pos_response.data
           })
         }
+
     })
+    // console.log(this.state)
+    // this.state.positions.forEach(element => {
+    //   console.log(element.symbol)
+    // });
 
     const string_name = 'bitcoin'
 
     coinapi.getCoinData(string_name).then((coinData) => {
       if (coinData) {
-        console.log(coinData.image.large)
+        // console.log(coinData.image.large)
         this.setState({
           pic: coinData.image.large,
         })
 
-        temp_str = "https://api.coingecko.com/api/v3/coins/"
-        console.log(temp_str+'bitcoin')
+        // console.log(this.state.positions)
+        // temp_str = "https://api.coingecko.com/api/v3/coins/"
+        // console.log(temp_str+'bitcoin')
       }
 
     })
+
+    
   }
 
   //Function to render a row for positions
   renderRow = ({item}) => {
     //Get color of the profit gain or loss
     const profit_color = ((item.change_today * 100) > 0) ? 'green' : 'red';
+
+    const coinapi = coinGeckoApi()
+
+    console.log(item.symbol)
+
+    coin_name = ""
+
+    //Alpaca currently only has 4 different types of crypto available for trading
+    //ETH, BTC, BCH, and LTC
+    switch(item.symbol) {
+      case "ETHUSD":
+        console.log("ethereum")
+
+      case "BTCUSD":
+        console.log("bitcoin")
+        
+      case "BCHUSD":
+        console.log("bitcoincash")
+
+      case "LTCUSD":
+        console.log("litecoin")
+
+      default:
+        console.log("error")
+    }
+
+    const string_name = 'bitcoin'
+
+    coinapi.getCoinData(string_name).then((coinData) => {
+      if (coinData) {
+        console.log(coinData.image.large)
+        // this.setState({
+        //   pic: coinData.image.large,
+        // })
+
+        // console.log(this.state.positions)
+        // temp_str = "https://api.coingecko.com/api/v3/coins/"
+        // console.log(temp_str+'bitcoin')
+      }
+
+    })
 
     return (
       <View key={item.asset_id} style={styles.positions}>
