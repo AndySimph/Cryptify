@@ -74,11 +74,26 @@ const getCoinData = async (coin_name) => {
   }
 }
 
+//Get data of a coin
+const getCoinImage = async (coin_name) => {
+  try {
+    const response = await axios.get("https://api.coingecko.com/api/v3/coins/"+coin_name);
+
+    const data = response.data.image.large;
+
+    return data;
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 const coinGeckoApi = () => {
 
   return {
       getMarketData,
-      getCoinData
+      getCoinData,
+      getCoinImage
   }
 }
 
