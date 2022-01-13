@@ -57,13 +57,10 @@ const getMarketData = async () => {
 //Get data of a coin
 const getCoinData = async (coin_name) => {
   try {
-    // console.log('here'+coin_name)
     //api call using requested link
     const response = await axios.get("https://api.coingecko.com/api/v3/coins/"+coin_name);
 
     const data = response.data;
-
-    // const formattedResponse = formatMarketData(data);
 
     // console.log(data.image)
 
@@ -74,26 +71,12 @@ const getCoinData = async (coin_name) => {
   }
 }
 
-//Get data of a coin
-const getCoinImage = async (coin_name) => {
-  try {
-    const response = await axios.get("https://api.coingecko.com/api/v3/coins/"+coin_name);
-
-    const data = response.data.image.large;
-
-    return data;
-
-  } catch (error) {
-    console.log(error.message);
-  }
-}
 
 const coinGeckoApi = () => {
 
   return {
       getMarketData,
       getCoinData,
-      getCoinImage
   }
 }
 

@@ -6,13 +6,6 @@ import { Text, View } from '../components/Themed';
 import coinGeckoApi from '../services/coingecko';
 import ListItem from '../components/ListCoins';
 
-//Global variable to hold the link to the image
-var image_link = ""
-var temp = []
-var image_ctr = -1
-var key_id = []
-var image_temp = ""
-
 console.log("----------------------------------------------")
 
 //Class for the screen
@@ -34,7 +27,6 @@ class PortfolioScreen extends React.Component {
       portfolio_value: 0,
 
       positions: [],
-      pic: "",
     }
 
   }
@@ -43,7 +35,6 @@ class PortfolioScreen extends React.Component {
   componentDidMount() {
 
     //Declare the api used
-    const coinapi = coinGeckoApi()
     const api = alpacaApi()
 
     //Use the account to get account data
@@ -71,59 +62,6 @@ class PortfolioScreen extends React.Component {
 
         //Get the position data
         if (pos_response.ok) {
-          for ( var i = 0; i < pos_response.data.length; i++) {
-            var coin_name = "error"
-
-            //Alpaca currently only has 4 different types of crypto available for trading
-            //ETH, BTC, BCH, and LTC
-            if (pos_response.data[i].symbol == 'ETHUSD') {
-              coin_name = 'ethereum'
-            } else if (pos_response.data[i].symbol == 'BTCUSD') {
-              coin_name = 'bitcoin'
-            } else if (pos_response.data[i].symbol == 'LTCUSD') {
-              coin_name = 'litecoin'
-            } else if (pos_response.data[i].symbol == 'BCHUSD') {
-              coin_name = 'bitcoincash'
-            } 
-
-            if (coin_name != "error") {
-              coinapi.getCoinImage(coin_name).then((coinData) => {
-                if (coinData) {
-                  // pos_response.data[i].img_link = "here"
-                  // image_link = coinData.image.large
-                  // this.setState({
-                  //   pic: coinData.image.large
-                  // })
-                  this.setState({
-                    pic: coinData
-                  })
-                  // console.log(this.state)
-                }
-              })
-              // console.log(this.state)
-              // console.log(coin_name)
-              // coinapi.getCoinData(coin_name).then((coinData) => {
-              //   if (coinData) {
-              //     // pos_response.data[i].img_link = "here"
-              //     image_link = coinData.image.large
-              //     this.setState({
-              //       pic: coinData.image.large
-              //     })
-              //   }
-              //   // console.log(this.state)
-              // })
-              // console.log(this.state)
-
-              // console.log(temp)
-              // console.log(image_link)
-              // console.log(pos_response.data[i])
-
-            }
-            // pos_response.data[i].img_link = this.state.pic
-            
-
-          }
-          // console.log(this.state)
           this.setState({
             positions: pos_response.data
           })
@@ -137,19 +75,11 @@ class PortfolioScreen extends React.Component {
     //Get color of the profit gain or loss
     const profit_color = ((item.change_today * 100) > 0) ? 'green' : 'red';
 
+    //Declare the api and coin name
     const coinapi = coinGeckoApi()
-    // // console.log(key_id)
-    // if (!(key_id.includes(item.asset_id))) {
-    //   key_id.push(item.asset_id)
-    //   image_ctr += 1
-    // }
-    // for (var i = 0; i < this.state.positions.length; i++) {
-    //   this.state.positions[i].here = "yes"
-    // }
-
     coin_name = "error"
 
-    // //Alpaca currently only has 4 different types of crypto available for trading
+    //Alpaca currently only has 4 different types of crypto available for trading
     //ETH, BTC, BCH, and LTC
     if (item.symbol == 'ETHUSD') {
       coin_name = 'ethereum'
@@ -161,40 +91,21 @@ class PortfolioScreen extends React.Component {
       coin_name = 'bitcoincash'
     } 
 
-    // // console.log(coin_name)
-    
+    //Get the image for the coin
     if (coin_name != "error") {
-      // console.log(coin_name)
       coinapi.getCoinData(coin_name).then((coinData) => {
         if (coinData) {
-          // console.log(coinData.image.large)
-          // image_link = coinData.image.large
-          // if (!temp.includes(image_link)) {
-          //   temp.push(coinData.image.large)
-          // }
           item.here = coinData.image.large
         }
       })
     }
 
-    // console.log(item)
-    // console.log(image_link)
-    // console.log(image_ctr)
-    // console.log(temp)
-    // console.log(temp[image_ctr])
-
     return (
       <View key={item.asset_id} style={styles.positions}>
-        {/* {console.log(item.asset_id)} */}
         
         <View style={{ flex: 1 }}>
           <Text style={styles.symbol}>{item.symbol}</Text>
-          {/* <Image source={image_link ? {uri: image_link } : null} style={styles.image} /> */}
           <Image source={item.here ? {uri: item.here } : null} style={styles.image} />
-          {/* <Image source={temp[image_ctr] ? {uri: temp[image_ctr] } : null} style={styles.image} /> */}
-          {/* <Image source={temp[image_ctr] ? {uri: temp[image_ctr] } : null} style={styles.image} /> */}
-
-          {/* {image_ctr += 1} */}
         </View>
         <View style={{ flex: 1 }}>
           <Text>{item.qty}</Text>
