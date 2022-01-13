@@ -93,6 +93,7 @@ class PortfolioScreen extends React.Component {
 
     //Get the image for the coin
     if (coin_name != "error") {
+      //Call the api and created function
       coinapi.getCoinData(coin_name).then((coinData) => {
         if (coinData) {
           item.here = coinData.image.large
@@ -101,8 +102,8 @@ class PortfolioScreen extends React.Component {
     }
 
     return (
+      //Set up output by asset id
       <View key={item.asset_id} style={styles.positions}>
-        
         <View style={{ flex: 1 }}>
           <Text style={styles.symbol}>{item.symbol}</Text>
           <Image source={item.here ? {uri: item.here } : null} style={styles.image} />
